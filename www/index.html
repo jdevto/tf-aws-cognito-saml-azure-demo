@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS Cognito + Azure AD Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AWS Cognito + Azure AD Integration Demo</h1>
+            <p class="subtitle">Demonstrating OIDC authentication flow with Azure AD as identity provider</p>
+        </header>
+
+        <main>
+            <div id="login-section" class="card">
+                <h2>Authentication Status</h2>
+                <div id="status" class="status-message">Not authenticated</div>
+                <button id="login-btn" class="btn btn-primary">Login with Azure AD</button>
+                <button id="logout-btn" class="btn btn-secondary" style="display: none;">Logout</button>
+            </div>
+
+            <div id="user-info-section" class="card" style="display: none;">
+                <h2>User Information</h2>
+                <div id="user-info" class="user-info">
+                    <div class="info-item">
+                        <span class="label">Name:</span>
+                        <span id="user-name" class="value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Email:</span>
+                        <span id="user-email" class="value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Given Name:</span>
+                        <span id="user-given-name" class="value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Family Name:</span>
+                        <span id="user-family-name" class="value">-</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Token Expires:</span>
+                        <span id="token-expires" class="value">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>How It Works</h2>
+                <div class="info-content">
+                    <p>This demo showcases AWS Cognito configured with Azure AD as an OIDC identity provider.</p>
+                    <ol>
+                        <li><strong>Click "Login with Azure AD"</strong> - You'll be redirected directly to Azure AD (authentication happens there)</li>
+                        <li><strong>Authenticate</strong> - Sign in with your Azure AD credentials at Microsoft</li>
+                        <li><strong>Azure AD redirects back</strong> - To Cognito with authorization grant</li>
+                        <li><strong>Cognito federates</strong> - Validates with Azure AD and creates session</li>
+                        <li><strong>Tokens returned</strong> - Cognito redirects to app with ID token and access token in URL hash</li>
+                        <li><strong>User Info displayed</strong> - Your information from Azure AD is extracted from the ID token</li>
+                    </ol>
+                    <p class="note">This demonstrates the OAuth 2.0 implicit flow with OIDC, where authentication happens entirely at Azure AD, and Cognito acts as the federation layer. Tokens are returned directly to the browser (no backend required).</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with AWS Cognito, Azure AD, and Terraform</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
